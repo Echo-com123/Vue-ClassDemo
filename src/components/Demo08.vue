@@ -19,6 +19,7 @@
 
       <input type="checkbox" v-model="user.hobby" value="运动" id="sport" />
       <label for="sport">运动</label>
+      
     </p >
 
     <!-- 2. 下拉框：注意占位符 disabled -->
