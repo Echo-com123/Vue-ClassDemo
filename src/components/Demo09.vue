@@ -188,6 +188,7 @@ button {
 .btn-reset {
   background-color: #f0f0f0;
   color: #333;
+  
 }
 
 .btn-reset:hover {
