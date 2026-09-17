@@ -6,23 +6,23 @@
             <legend>基本信息</legend>
             <p>
                 <label for="username">用户名：</label>
-                <input v-model="username" type="text" id="username" name="username" placeholder="请输入用户名" required>
+                <input v-model="user.username" type="text" id="username" name="username" placeholder="请输入用户名" required>
             </p>
             <p>
                 <label for="password">密码：</label>
-                <input v-model="password" type="password" id="password" name="password" placeholder="请输入密码" required>
+                <input v-model="user.password" type="password" id="password" name="password" placeholder="请输入密码" required>
             </p>
             <p>
                 <label for="confirmPassword">确认密码：</label>
-                <input v-model="confirmPassword" type="password" id="confirmPassword" name="confirmPassword" placeholder="请再次输入密码" required>
+                <input v-model="user.confirmPassword" type="password" id="confirmPassword" name="confirmPassword" placeholder="请再次输入密码" required>
             </p>
             <p>
                 <label for="email">邮箱：</label>
-                <input v-model="email" type="email" id="email" name="email" placeholder="请输入邮箱地址">
+                <input v-model="user.email" type="email" id="email" name="email" placeholder="请输入邮箱地址">
             </p>
             <p>
                 <label for="phone">手机号：</label>
-                <input v-model="phone" type="tel" id="phone" name="phone" placeholder="请输入手机号">
+                <input v-model="user.phone" type="tel" id="phone" name="phone" placeholder="请输入手机号">
             </p>
         </fieldset>
         <!-- 单选框 -->
@@ -30,11 +30,11 @@
             <legend>个人信息</legend>
             <p>性别：</p>
             <p>
-                <input v-model="gender" type="radio" id="male" name="gender" value="male">
+                <input v-model="user.gender" type="radio" id="male" name="gender" value="male">
                 <label for="male">男</label>
-                <input v-model="gender" type="radio" id="female" name="gender" value="female">
+                <input v-model="user.gender" type="radio" id="female" name="gender" value="female">
                 <label for="female">女</label>
-                <input v-model="gender" type="radio" id="secret" name="gender" value="secret">
+                <input v-model="user.gender" type="radio" id="secret" name="gender" value="secret">
                 <label for="secret">保密</label>
             </p>
             <!-- 下拉列表 -->
@@ -53,7 +53,7 @@
             </p>
             <p>
                 <label for="city">所在城市：</label>
-                <select v-model="city" id="city" name="city">
+                <select v-model="user.city" id="city" name="city">
                     <option value="">--请选择城市--</option>
                     <option value="city1">城市1</option>
                     <option value="city2">城市2</option>
@@ -64,17 +64,17 @@
             <!-- 多选框 -->
             <p>兴趣爱好：</p>
             <p>
-                <input v-model="hobby" type="checkbox" id="reading" name="hobby" value="reading">
+                <input v-model="user.hobby" type="checkbox" id="reading" name="hobby" value="reading">
                 <label for="reading">阅读</label>
-                <input v-model="hobby" type="checkbox" id="sports" name="hobby" value="sports">
+                <input v-model="user.hobby" type="checkbox" id="sports" name="hobby" value="sports">
                 <label for="sports">运动</label>
-                <input v-model="hobby" type="checkbox" id="music" name="hobby" value="music">
+                <input v-model="user.hobby" type="checkbox" id="music" name="hobby" value="music">
                 <label for="music">音乐</label>
-                <input v-model="hobby" type="checkbox" id="travel" name="hobby" value="travel">
+                <input v-model="user.hobby" type="checkbox" id="travel" name="hobby" value="travel">
                 <label for="travel">旅行</label>
-                <input v-model="hobby" type="checkbox" id="game" name="hobby" value="game">
+                <input v-model="user.hobby" type="checkbox" id="game" name="hobby" value="game">
                 <label for="game">游戏</label>
-                <input v-model="hobby" type="checkbox" id="movie" name="hobby" value="movie">
+                <input v-model="user.hobby" type="checkbox" id="movie" name="hobby" value="movie">
                 <label for="movie">电影</label>
             </p>
         </fieldset>
@@ -83,40 +83,55 @@
             <legend>补充信息</legend>
             <p>
                 <label for="bio">个人简介：</label><br>
-                <textarea v-model="bio" id="bio" name="bio" rows="5" cols="40" placeholder="请简单介绍一下自己..."></textarea>
+                <textarea v-model="user.bio" id="bio" name="bio" rows="5" cols="40" placeholder="请简单介绍一下自己..."></textarea>
             </p>
         </fieldset>
         <!-- 提交与重置按钮 -->
         <p>
             <input type="submit" value="注册">
-            <input type="reset" value="重置">
-        </p>
+            <input  @click="clean" type="reset" value="重置">
+        </p>    
     </form>
     <div>
-        {{ username }}
-        {{ password }}
-        {{ confirmPassword }}
-        {{ email }}
-        {{ phone }}
-        {{ gender }}
-        {{ province }}
-        {{ city }}
-        {{ hobby }}
-        {{ bio }}
+        {{ user }}
     </div>
 </template>
 <script setup>
-import { ref } from 'vue';
-const username = ref("admin")
-const password = ref("***********")
-const confirmPassword = ref("")
-const email = ref("123@qq.com")
-const phone = ref("")
-const gender = ref("male")
-const province = ref("")
-const city = ref("")
-const hobby = ref([])
-const bio = ref("")
+// import { ref } from 'vue';
+// const username = ref("admin")
+// const password = ref("***********")
+// const confirmPassword = ref("")
+// const email = ref("123@qq.com")
+// const phone = ref("")
+// const gender = ref("male")
+// const province = ref("")
+// const city = ref("")
+// const hobby = ref([])
+// const bio = ref("")
+
+const user = reactive({
+  username: "",
+  password: "",
+  confirmPassword: "",
+  email: "",
+  phone: "",
+  gender: "male",
+  province: "",
+  city: "",
+  hobby: [],
+  bio: ""
+})
+
+const clean = () => {
+  user.username = ""
+  user.password = ""
+  user.confirmPassword = ""
+  user.email = ""
+  user.phone = ""
+  user.gender = "male"
+  user.province = ""
+  user.city = ""
+}
 
 //城市选项集合，二级联动核心数据
 const cityOptions = ref([])
