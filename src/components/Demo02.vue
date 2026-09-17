@@ -4,6 +4,7 @@
 <p v-bind:class="a">这是一个英雄图片</p>
 
 <!-- v-on @ -->
+ 
  <button v-on:click="onclick">点击我</button>
 </template>
 
